@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+       http://code.alibabatech.com/schema/dubbo 
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- context:component-scan base-package="yu.zhong.hu" /-->
+    
+    <!-- consumer's application name, used for tracing dependency relationship (not a matching criterion), don't set it same as provider -->
+    <dubbo:application name="demo-consumer"/>
+    <!-- use multicast registry center to discover service -->
+    <dubbo:registry protocol="zookeeper" address="125.210.163.43:2181"/>
+    <!-- generate proxy for the remote service, then demoService can be used in the same way as the local regular interface -->
+    <dubbo:reference id="demoService" check="false" interface="yu.zhong.hu.ICalcService"/>   
+</beans>
